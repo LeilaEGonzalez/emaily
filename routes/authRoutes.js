@@ -14,7 +14,7 @@ module.exports = (app) => {
     res.send(req.user);
   });
   app.get("/.netlify/functions/api/user", (req, res) => {
-    console.log(user);
+    console.log(req.user);
     res.send(req.user);
   });
 };
