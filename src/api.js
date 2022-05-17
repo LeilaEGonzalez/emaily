@@ -15,8 +15,10 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       callbackURL: "http://localhost:9000/.netlify/functions/api/",
     },
-    (accessToken) => {
-      console.log(accessToken);
+    (accessToken, refreshToken, profile, done) => {
+      console.log("access token", accessToken);
+      console.log("refresh token", refreshToken);
+      console.log("profile:", profile);
     }
   )
 );
@@ -26,4 +28,5 @@ app.get(
     scope: ["profile", "email"],
   })
 );
+app.get("/.netlify/functions/api", passport.authenticate("google"));
 module.exports.handler = serverless(app);
