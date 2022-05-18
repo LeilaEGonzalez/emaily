@@ -19,7 +19,8 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: "http://localhost:9000/.netlify/functions/api/",
+      callbackURL:
+        "https://glowing-raindrop-91526c.netlify.app/.netlify/functions/api/",
       proxy: true,
     },
     (accessToken, refreshToken, profile, done) => {
