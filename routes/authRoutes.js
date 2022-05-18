@@ -8,7 +8,7 @@ module.exports = (app) => {
     })
   );
 
-  app.get("/.netlify/functions/api", passport.authenticate("google"));
+  app.get("/.netlify/functions/api/callback", passport.authenticate("google"));
 
   app.get("/.netlify/functions/api/logout", (req, res) => {
     req.logout();
@@ -16,7 +16,7 @@ module.exports = (app) => {
   });
 
   app.get("/.netlify/functions/api/user", (req, res) => {
-    console.log(req.user);
+    console.log(`googleID: ${req.user.googleId}`);
     res.send(req.user);
   });
 };
