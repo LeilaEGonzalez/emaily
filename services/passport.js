@@ -2,6 +2,7 @@ const GoogleStrategy = require("passport-google-oauth20");
 const passport = require("passport");
 const keys = require("../config/keys");
 const mongoose = require("mongoose");
+const links = require("../links");
 
 const User = mongoose.model("users");
 
@@ -20,7 +21,7 @@ passport.use(
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       callbackURL:
-        "https://glowing-raindrop-91526c.netlify.app/.netlify/functions/api/",
+        process.env.NODE_ENV === "production" ? links.prodLink : links.devLink,
       proxy: true,
     },
     (accessToken, refreshToken, profile, done) => {

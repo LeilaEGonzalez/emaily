@@ -8,14 +8,19 @@
     "npm": "8.1.0"
   },
   "scripts": {
-    "start": "netlify-lambda serve src",
-    "dev": "nodemon api.js",
-    "build": "netlify-lambda build src"
+    "start-dev": "cross-env NODE_ENV=development netlify-lambda serve src",
+    "start": "cross-env NODE_ENV=production netlify-lambda serve src",
+    "server": "cross-env NODE_ENV=production nodemon api.js",
+    "build": "cross-env NODE_ENV=production netlify-lambda build src",
+    "client": "cross-env NODE_ENV=production npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^7.2.0",
     "cookie-session": "^2.0.0",
+    "cross-env": "^7.0.3",
     "express": "^4.18.1",
     "lambda": "^0.10.3",
     "mongoose": "^6.3.3",
